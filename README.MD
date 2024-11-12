@@ -27,7 +27,7 @@
 
 #### Install Required Python Packages
 
-To handle dependencies, create a `requirements.txt` file with the following content:
+To handle dependencies, create a `modules.txt` file with the following content:
 
 ```plaintext
 Flask
