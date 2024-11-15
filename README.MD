@@ -40,7 +40,7 @@ google-api-python-client
 Then install the packages with:
 
 ```bash
-pip install -r requirements.txt
+pip install -r modules.txt
 ```
 
 To learn more about these packages:
