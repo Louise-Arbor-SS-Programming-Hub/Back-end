@@ -98,9 +98,9 @@ project-directory/
 └── requirements.txt      # Package dependencies
 ```
 
-### 4. **Code Setup in `app.py`**
+### 4. **Code Setup in `main.py`**
 
-Your main Python script (`app.py`) includes functionality to:
+Your main Python script (`main.py`) includes functionality to:
 
 - Handle OAuth 2.0 authorization with Google.
 - Read BCC recipients from a file (`emails.txt`).
@@ -112,7 +112,7 @@ Your main Python script (`app.py`) includes functionality to:
 To start the app with HTTPS support, open your terminal, navigate to your project directory, and run:
 
 ```bash
-python app.py
+python main.py
 ```
 
 The app will start on `https://127.0.0.1:8080`.
