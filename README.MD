@@ -27,7 +27,7 @@
 
 #### Install Required Python Packages
 
-To handle dependencies, create a `requirements.txt` file with the following content:
+To handle dependencies, create a `modules.txt` file with the following content:
 
 ```plaintext
 Flask
@@ -40,7 +40,7 @@ google-api-python-client
 Then install the packages with:
 
 ```bash
-pip install -r requirements.txt
+pip install -r modules.txt
 ```
 
 To learn more about these packages:
