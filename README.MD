@@ -19,7 +19,7 @@ project-directory/
 ├── server.crt            # SSL certificate for HTTPS
 ├── server.key            # SSL key for HTTPS
 ├── token.json            # (Generated after OAuth authorization)
-├── app.py                # Main Python script
+├── main.py                # Main Python script
 └── requirements.txt      # Package dependencies
 ```
 
