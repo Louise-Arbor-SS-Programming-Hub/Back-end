@@ -1,3 +1,32 @@
+# Gmail API Email Scheduler
+
+This project allows you to send emails using the Gmail API and schedule them based on user-defined time intervals. The emails are sent with BCC recipients read from a text file. The project uses Flask for the web application and Google OAuth for authentication.
+
+## Features
+- OAuth 2.0 authentication with Gmail API.
+- Sends emails to multiple recipients using BCC.
+- Schedule emails based on a human-readable time format (e.g., "5 min", "1 hr").
+- Local Flask server running with HTTPS support.
+
+## Project Structure
+
+Your directory structure should look like this:
+
+```
+project-directory/
+│
+├── credentials.json      # OAuth credentials downloaded from Google Cloud
+├── server.crt            # SSL certificate for HTTPS
+├── server.key            # SSL key for HTTPS
+├── token.json            # (Generated after OAuth authorization)
+├── app.py                # Main Python script
+└── requirements.txt      # Package dependencies
+```
+
+## Prerequisites
+
+Before you can run this project, ensure that you have the following set up:
+
 ### 1. **Set Up Google Cloud Console**
 
 1. **Create a Google Cloud Project**:
@@ -21,8 +50,6 @@
    - Go to the **[OAuth consent screen](https://console.cloud.google.com/apis/credentials/consent)**.
    - Add your Google account (and others you want to test with) under **Test users**.
 
----
-
 ### 2. **Set Up Local Environment**
 
 #### Install Required Python Packages
@@ -35,20 +62,14 @@ google-auth
 google-auth-oauthlib
 google-auth-httplib2
 google-api-python-client
+APScheduler
 ```
 
 Then install the packages with:
 
 ```bash
-pip install -r requirements.txt
+pip install -r modules.txt
 ```
-
-To learn more about these packages:
-   - [Flask](https://flask.palletsprojects.com/) – for building web applications in Python.
-   - [google-auth](https://google-auth.readthedocs.io/) – for Google’s OAuth 2.0 authorization.
-   - [google-auth-oauthlib](https://google-auth-oauthlib.readthedocs.io/) – to simplify OAuth 2.0 with Google APIs.
-   - [google-auth-httplib2](https://google-auth.readthedocs.io/en/stable/httplib2.html) – HTTP libraries used with Google Auth.
-   - [google-api-python-client](https://developers.google.com/api-client-library/python) – Google API client for Python.
 
 #### Generate SSL Certificates for HTTPS
 
@@ -60,19 +81,13 @@ For HTTPS support, you’ll need SSL certificates:
    openssl req -x509 -newkey rsa:4096 -keyout server.key -out server.crt -days 365 -nodes
    ```
 
-   Learn more about generating SSL certificates here: [OpenSSL Documentation](https://www.openssl.org/docs/).
-
-   Download SSL here: [SSL](https://slproweb.com/products/Win32OpenSSL.html)
-
 2. Save `server.crt` and `server.key` in your project folder.
-
----
 
 ### 3. **Create Project File Structure**
 
-Your directory structure should look like this:
+Ensure that your project has the following file structure:
 
-```plaintext
+```
 project-directory/
 │
 ├── credentials.json      # OAuth credentials downloaded from Google Cloud
@@ -83,43 +98,46 @@ project-directory/
 └── requirements.txt      # Package dependencies
 ```
 
-### 4. **Code Setup in `app.py` or `main.py`**
+### 4. **Code Setup in `app.py`**
 
-You already have the code with comments explaining each section.
+Your main Python script (`app.py`) includes functionality to:
 
----
+- Handle OAuth 2.0 authorization with Google.
+- Read BCC recipients from a file (`emails.txt`).
+- Send emails using Gmail API.
+- Schedule emails at a user-defined time.
 
 ### 5. **Run the Flask App**
 
 To start the app with HTTPS support, open your terminal, navigate to your project directory, and run:
 
 ```bash
-python main.py
+python app.py
 ```
 
-Access the app in your browser at whatever your local host link is.
+The app will start on `https://127.0.0.1:8080`.
 
-### 6. **Authorizing the App**
+### 6. **Authorize the App**
 
-When you go to the local host website, you should be directed to Google’s OAuth consent screen to authorize the app. Once authorized, the app will be able to send an email through the Gmail API.
+When you visit the local host website, you'll be redirected to Google’s OAuth consent screen. Once authorized, the app will be able to send emails via the Gmail API.
 
----
-
-### 7. **Files for GitHub**
+### 7. **Files to Include in GitHub Repository**
 
 Ensure you include the following files in your GitHub repository:
 
-- **app.py**: Your main Flask and Gmail API code.
-- **requirements.txt**: Python package dependencies.
+- **main.py**: Your main Flask and Gmail API code.
+- **modules.txt**: Python package dependencies.
 - **README.md**: A description of the project setup, including links to required resources.
 
-# Sensitive files to exclude from GitHub:
+### 8. **Sensitive Files to Exclude from GitHub**
+
+Make sure to exclude the following files from your GitHub repository:
 
 - `credentials.json`
 - `server.crt` and `server.key`
 - `token.json`
 
-Add these entries in your `.gitignore` file:
+Add these entries to your `.gitignore` file:
 
 ```plaintext
 credentials.json
@@ -128,4 +146,11 @@ server.key
 token.json
 ```
 
-You can learn more about GitHub’s `.gitignore` here: [GitHub Documentation on Ignoring Files](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
+For more information about using `.gitignore`, visit the [GitHub Documentation on Ignoring Files](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
+
+---
+
+### 9. **Notes**
+
+- The email addresses to be added in the BCC field are read from a text file (`emails.txt`), which should have one email address per line.
+- The email sending can be scheduled in intervals (e.g., "5 min", "1 hr", or "2 days") using the Flask server and the APScheduler library.
